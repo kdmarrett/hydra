@@ -1,0 +1,14 @@
+debugging file: src/lib/Hydra/Controller/Root.pm
+for Error: 
+origin: http://vast.cs.ucla.edu
+referer: http://vast.cs.ucla.edu/hydra
+
+//= mean?
+on line 81 
+$referer is http://vast.cs.ucla.edu
+and $base is http://vast.cs.ucla.edu/hydra/
+so:
+substr($referer, 0, length $base) eq $base; 
+
+just change 76:77 to
+my $referer = $c->req->header('Referer');

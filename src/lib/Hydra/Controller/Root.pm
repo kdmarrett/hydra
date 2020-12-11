@@ -74,7 +74,11 @@ sub begin :Private {
     # XSRF protection: require POST requests to have the same origin.
     if ($c->req->method eq "POST" && $c->req->path ne "api/push-github") {
         my $referer = $c->req->header('Origin');
-        $referer //= $c->req->header('Referer');
+        # this line changes url paths to no longer
+        # include their final component
+        # which causes the error below
+        # commenting out
+        # $referer //= $c->req->header('Referer');
         my $base = $c->req->base;
         die unless $base =~ /\/$/;
         $referer .= "/";
